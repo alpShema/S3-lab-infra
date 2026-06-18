@@ -674,7 +674,7 @@ Resources:
     Properties:
       ServiceName: !Sub ${ProjectName}-service
       Cluster: !Ref EcsCluster
-      TaskDefinition: !Ref TaskDefinition
+      TaskDefinition: !Sub ${ProjectName}-task
       LaunchType: FARGATE
       DesiredCount: 1
       DeploymentController:
