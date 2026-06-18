@@ -1,0 +1,12 @@
+# Environment — never commit account IDs or local config
+.env
+.env.*
+
+
+# IDE
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
