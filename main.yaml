@@ -641,6 +641,8 @@ Resources:
               Value: !Ref ImageBucket
             - Name: CLOUDFRONT_URL
               Value: !Sub https://${CloudFrontDistribution.DomainName}
+            - Name: CLOUDFRONT_DISTRIBUTION_ID
+              Value: !Ref CloudFrontDistribution
             - Name: DB_HOST
               Value: !GetAtt RdsInstance.Endpoint.Address
             - Name: DB_PORT
@@ -1162,8 +1164,7 @@ Resources:
               Bool:
                 'aws:SecureTransport': false
 
-  # Inline policy on the task role — allows the application code to upload and read photos.
-  # DeleteObject is included so the app can clean up orphaned files if needed.
+  # Inline policy on the task role — allows the application code to upload, read, and delete photos.
   TaskRoleS3Policy:
     Type: AWS::IAM::Policy
     Properties:
@@ -1180,6 +1181,20 @@ Resources:
           - Effect: Allow
             Action: s3:ListBucket
             Resource: !GetAtt ImageBucket.Arn
+      Roles:
+        - !Ref TaskRole
+
+  # Allows the app to invalidate CloudFront cache when a photo is deleted.
+  TaskRoleCloudFrontPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: CloudFrontInvalidation
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action: cloudfront:CreateInvalidation
+            Resource: !Sub arn:aws:cloudfront::${AWS::AccountId}:distribution/${CloudFrontDistribution}
       Roles:
         - !Ref TaskRole
 
@@ -1299,6 +1314,10 @@ Outputs:
   CloudFrontUrl:
     Description: CloudFront URL for serving images. Set as CLOUDFRONT_URL variable in the app repo.
     Value: !Sub https://${CloudFrontDistribution.DomainName}
+
+  CloudFrontDistributionId:
+    Description: CloudFront distribution ID — needed for cache invalidations on photo delete.
+    Value: !Ref CloudFrontDistribution
 
   RdsEndpoint:
     Description: RDS hostname — passed to the app as DB_HOST.
