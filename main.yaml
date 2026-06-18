@@ -1226,7 +1226,7 @@ Resources:
       DBInstanceIdentifier: !Sub ${ProjectName}-db
       DBName: !Ref DBName
       Engine: postgres
-      EngineVersion: '16.4'
+      EngineVersion: '16.9'
       DBInstanceClass: db.t3.micro
       AllocatedStorage: '20'
       StorageType: gp2
