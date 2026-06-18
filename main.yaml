@@ -653,7 +653,7 @@ Resources:
           # from Secrets Manager — never stored in plain text in the task definition.
           Secrets:
             - Name: DB_PASSWORD
-              ValueFrom: !Ref DBPasswordSecret
+              ValueFrom: !Sub '${DBPasswordSecret}:password::'
           HealthCheck:
             Command:
               - CMD-SHELL
