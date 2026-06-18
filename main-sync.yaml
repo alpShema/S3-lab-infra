@@ -11,7 +11,7 @@ capabilities:
 parameters:
   ProjectName: s3-lab
   GitHubOrg: alpShema
-  GitHubAppRepo: s3-lab-app
+  GitHubAppRepo: S3-lab-app
   GitHubBranch: main
   DBName: photodb
   DBUsername: photoapp

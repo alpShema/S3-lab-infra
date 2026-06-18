@@ -22,7 +22,7 @@ Parameters:
 
   GitHubAppRepo:
     Type: String
-    Default: s3-lab-app
+    Default: S3-lab-app
     Description: GitHub repository name for the application code.
 
   GitHubBranch:
