@@ -641,8 +641,6 @@ Resources:
               Value: !Ref ImageBucket
             - Name: CLOUDFRONT_URL
               Value: !Sub https://${CloudFrontDistribution.DomainName}
-            - Name: CLOUDFRONT_DISTRIBUTION_ID
-              Value: !Ref CloudFrontDistribution
             - Name: DB_HOST
               Value: !GetAtt RdsInstance.Endpoint.Address
             - Name: DB_PORT
