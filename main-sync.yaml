@@ -1,8 +1,7 @@
 template-file-path: main.yaml
 sync-type: CFN_STACK_SYNC
 
-# These tell AWS exactly which stack name and region to target
-stack-name: ecs-lab-main
+stack-name: s3-lab-main
 region: eu-central-1
 
 capabilities:
@@ -10,9 +9,9 @@ capabilities:
   - CAPABILITY_AUTO_EXPAND
 
 parameters:
-  ProjectName: ecs-lab
+  ProjectName: s3-lab
   GitHubOrg: alpShema
-  GitHubAppRepo: ecs-lab-app
+  GitHubAppRepo: s3-lab-app
   GitHubBranch: main
   DBName: photodb
   DBUsername: photoapp
