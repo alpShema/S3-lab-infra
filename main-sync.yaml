@@ -1,17 +1,9 @@
 template-file-path: main.yaml
-sync-type: CFN_STACK_SYNC
-
-stack-name: s3-lab-main
-region: eu-central-1
-
-capabilities:
-  - CAPABILITY_NAMED_IAM
-  - CAPABILITY_AUTO_EXPAND
-
 parameters:
   ProjectName: s3-lab
   GitHubOrg: alpShema
+  DBName: photodb
   GitHubAppRepo: S3-lab-app
   GitHubBranch: main
-  DBName: photodb
   DBUsername: photoapp
+tags: {}
